@@ -2,6 +2,8 @@ package com.mover.tugasdicodingapp;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
+
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuInflater;
@@ -26,7 +28,8 @@ public class MainActivity extends AppCompatActivity {
     public boolean onOptionsItemSelected(@NonNull MenuItem item) {
         switch (item.getItemId()){
             case R.id.user_detail:
-//                saveHalte();
+                Intent goDetail = new Intent(MainActivity.this,DetailActivity.class);
+                startActivity(goDetail);
                 return true;
             //add more item if you have another item to be clicked
             default:
