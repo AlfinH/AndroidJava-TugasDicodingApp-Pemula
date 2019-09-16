@@ -2,6 +2,8 @@ package com.mover.tugasdicodingapp;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -9,12 +11,26 @@ import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 
+import com.mover.tugasdicodingapp.adapter.PlaceAdapter;
+import com.mover.tugasdicodingapp.model.Place;
+
+import java.util.ArrayList;
+
 public class MainActivity extends AppCompatActivity {
+
+    private RecyclerView rvPlaces;
+    private ArrayList<Place> list = new ArrayList<>();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
+        rvPlaces = findViewById(R.id.recycler_places);
+        rvPlaces.setHasFixedSize(true);
+
+        list.addAll(PlacesData.getListData());
+        showRecyclerCardView();
     }
 
     @Override
@@ -35,5 +51,11 @@ public class MainActivity extends AppCompatActivity {
             default:
                 return super.onOptionsItemSelected(item);
         }
+    }
+
+    private void showRecyclerCardView(){
+        rvPlaces.setLayoutManager(new LinearLayoutManager(this));
+        PlaceAdapter PlaceAdapter = new PlaceAdapter(list);
+        rvPlaces.setAdapter(PlaceAdapter);
     }
 }
