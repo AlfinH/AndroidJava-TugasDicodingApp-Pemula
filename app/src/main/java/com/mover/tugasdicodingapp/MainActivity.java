@@ -44,7 +44,7 @@ public class MainActivity extends AppCompatActivity {
     public boolean onOptionsItemSelected(@NonNull MenuItem item) {
         switch (item.getItemId()){
             case R.id.user_detail:
-                Intent goDetail = new Intent(MainActivity.this,DetailActivity.class);
+                Intent goDetail = new Intent(MainActivity.this, AboutActivity.class);
                 startActivity(goDetail);
                 return true;
             //add more item if you have another item to be clicked
@@ -55,7 +55,17 @@ public class MainActivity extends AppCompatActivity {
 
     private void showRecyclerCardView(){
         rvPlaces.setLayoutManager(new LinearLayoutManager(this));
-        PlaceAdapter PlaceAdapter = new PlaceAdapter(list);
-        rvPlaces.setAdapter(PlaceAdapter);
+        PlaceAdapter placeAdapter = new PlaceAdapter(list);
+        placeAdapter.setOnItemClickListener(new PlaceAdapter.OnItemClickListener() {
+            @Override
+            public void onItemClick(Place place, int position) {
+                Intent goPlaceDetail = new Intent(MainActivity.this, DetailActivity.class);
+                goPlaceDetail.putExtra("EXTRA_PLACE", place);
+                startActivity(goPlaceDetail);
+            }
+        });
+
+        rvPlaces.setAdapter(placeAdapter);
+
     }
 }

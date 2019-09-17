@@ -1,6 +1,8 @@
 package com.mover.tugasdicodingapp.model;
 
-public class Place {
+import java.io.Serializable;
+
+public class Place implements Serializable {
     String name,detail;
     int image;
 
